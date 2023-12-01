@@ -1,7 +1,9 @@
 Here is a detailed walkthrough of the steps I took to create a SIEM system. This project revolved around Microsoft Azure and therefore, my first step was to create a Microsoft Azure account. 
 
 **Step 1 - Create an Azure account**
+
 Whilst creating this project, Azure were running a promotion allowing new users to obtain $200 credit upon signup. This will help cover the costs of running this project.
+
 ![Free Azure Account](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/4db3a1ed-f249-4a63-b919-252580198b80)
 
 
@@ -193,3 +195,65 @@ Finally, I added the Sentinel to my LAW.
 
 
 At this stage, the required configurations have now beem completed to begin connecting to the VM itself. I am connecting via a remote desktop connection (RDP), which will require the public IP address of the VM. I found this in the 'Virtual Machines' section of Azure.
+
+
+
+![RDP - VM Connection](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/ab1b0338-6158-4e23-97e1-03b008e30104)
+
+
+
+Then I opened the 'Remote Desktop Connection' app on my desktop and inputted the VM's public IP address and clicked 'Connect'.
+
+
+
+![RDP - VM Log In Fail](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/bb46e984-f2c1-49e2-bf4c-c396e6066e19)
+
+
+
+For the first log in attempt, I purposely input the wrong password. I did this to test if it will be logged.
+
+
+
+![RDP - Certificate Error](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/0909c9a5-a8c9-42b5-b6eb-f4cb3e5318d0)
+
+
+
+After this I logged on successfully and accepted the identity certificate warning dialogue box.
+
+
+
+![RDP - VM Monitor](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/4a4cffc2-615c-451d-bf41-7586b013cbb6)
+
+
+
+![VM RDP - Network Discovery](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/a27e6dcf-94b8-4445-9df1-52bd2e975d79)
+
+
+
+Then the monitor loaded. The first thing I done was enable 'network discovery' so that my VM is more discoverable to threat actors.
+
+
+
+![VM - Event Viewer](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/d7a6c351-5478-46a6-a4d3-d1f5c32a1a44)
+
+
+
+The next step was to open 'Event Viewer' on my VM.
+
+
+
+![VM - Security Logs](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/14b40218-f097-4a3c-ab02-c9cd54900e05)
+
+
+
+Once loaded, I clicked on 'Windows Logs' and then 'Security'.
+
+
+
+![VM - Failed Logs](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/405fad1e-6ca4-4d48-a97c-e4b8fc5342db)
+
+
+
+Here is an example of a failed login attempt.
+
+
