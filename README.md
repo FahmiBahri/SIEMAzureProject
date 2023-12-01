@@ -254,6 +254,13 @@ Once loaded, I clicked on 'Windows Logs' and then 'Security'.
 
 
 
-Here is an example of a failed login attempt.
+![VM - Failed Log Report](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/67fe9b95-70a2-4d93-9579-e4718e6df5f8)
+
+
+
+
+Here is an example report of a failed login attempt. It contains valuable information like the source IP address.
+
+
 
 
