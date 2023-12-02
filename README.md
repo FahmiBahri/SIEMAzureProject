@@ -259,8 +259,157 @@ Once loaded, I clicked on 'Windows Logs' and then 'Security'.
 
 
 
-Here is an example report of a failed login attempt. It contains valuable information like the source IP address.
+Here is an example report of a failed login attempt. It contains valuable information, like the source IP address.
+
+My next step was to take abstracts of this information to make it more useful. I decided that I would utilise a program that will scan the source network IP address of attempted logins and reveal their geographical location. To do this, I needed to make use of an API - which I sourced from: ipgeolocation.io.
 
 
 
+![Ping Timeout VM](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/2533abc4-4248-4b3c-af32-ce853864f365)
 
+
+
+Before doing this, I decided to turn off the VM's firewall to make it even easier to discover. I know that it is not easily penetrable right now because when I try to ping it from my actual PC, my ping request times out.
+
+
+
+![VM - Firewall On](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/6064f531-f51e-4795-a395-8bbd28133577)
+
+
+
+I went to my firewall settings on the VM. All firewall settings were currently on.
+
+
+
+![VM - Firewall Off](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/0ec5dd67-9ead-4adf-8f44-f93ef73c3b8e)
+
+
+
+![Ping Success VM](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/57fb2007-6cc5-4d5d-8aa5-cd3d588eb340)
+
+
+
+I disabled all firewalls. Now I'm able to ping my VM from my PC.
+
+
+
+**Step 6 - Collecting Security Log Data from the VM**
+
+
+
+![VM - Log Exporter Save](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/fc898fef-9302-4768-b8c7-0773261fd5bb)
+
+
+
+The next step was for me to utilise a PowerShell script to export my VM's security logs onto a document. Whilst you can create a custom script, I made use of one that was already available online. 
+I pasted this script into PowerShell ISE on the VM and saved the document.
+
+
+
+![IP Geo Location - API Key](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/482e55ec-00b3-4064-bfba-b3d567855aed)
+
+
+
+![VM - API Key Update](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/75f8eabc-7e87-4ee9-982a-23e15eeb27b9)
+
+
+
+I then updated the API key with my personal one so that it works correctly for my resources and saved it again.
+
+
+
+![VM - Run PS Script](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/00216aa4-bffd-4045-9202-5e2b9ec8c3c0)
+
+
+
+After saving the document, I run the script. This script has been written in a way that it perpetually loops. Therefore, it will always extract the security logs from my VM and take geographical data from the IP addresses of failed login attempts.This will then be exported onto the text document file that has been generated. 
+
+
+
+![VM - Failed Logs Document](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/80aae54d-7092-45d9-af42-08439c52bd0c)
+
+
+
+The script I used exports the data onto a document in the 'ProgramData' folder of the VM. However, this folder was hidden so I needed to enable view of hidden documents.
+
+
+
+![VM - Example Log](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/888d5748-64c0-4e27-8e11-32567c1d7b0c)
+
+
+
+Here is an example entry of a failed login attempt that was recorded in the file.
+
+
+
+**Step 7 - Exporting the Log Data onto Azure**
+
+
+
+![LAW - New Custom Log](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/e4992fd3-d0c3-48e9-827a-d17373e7b6b7)
+
+
+
+To do this, I need to create a custom log on my LAW that will bring in the data from that document saved on my VM's 'ProgramData' folder.
+
+I went onto my LAW and clicked on: 'Tables', '+ Create' and then 'New custom log (MMA-based)'.
+
+
+
+![VM - Failed Logs Document](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/fd42cea9-1f79-45ec-a5ba-37d32f97faef)
+
+
+
+The document containing the failed logs was saved onto my VM. So I just copied the contents of that document and saved it onto a notepad document on my PC.
+
+
+
+![LAW - Open Sample Log](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/d4d8e24c-7854-4d63-84cf-c61640f42955)
+
+
+
+![LAW - Custom Log Record Delimiter](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/1a71f375-1092-466b-9724-4d96576ed391)
+
+
+
+Then I clicked 'Next'. For the 'Record delimiter', I left it on 'New line' as my file contents were logs where each entry was separated by a line.
+
+
+
+![LAW - VM Collection Path](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/80aa8084-cda2-4436-bd67-fff644b7b2ca)
+
+
+
+Next, I had to define the collection path for the document containing the logs. To do this, I went onto the folder containing the document in File Explorer on the VM. I then clicked on the path at the top of the window and copied it. I also took note of the file name.
+
+
+
+![LAW - Custom Log Collection Path](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/404e2c81-d77d-4316-83ba-dd87fa6c2f19)
+
+
+
+For this step, I first chose 'Windows' as the 'Type'. Then I pasted the path I copied earlier into the 'Path' text box, followed by a '\' and then the file name. It's important to put the file extension at the end, otherwise an error message appears. So for this, I used '.log' as the file extension. Then I clicked 'Next'.
+
+
+
+![LAW - Custom Log Name](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/b2551b5c-467e-47e4-9665-335b9d2bfa6d)
+
+
+
+Then I input a suitable name for the custom log.
+
+
+
+![LAW - Custom Log Create](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/585d056f-aef6-4df8-a4ee-c6b8031b83e9)
+
+
+
+Finally, I reviewed the details and created the custom log. It can take a while for the VM and the LAW to synchronise properly. 
+
+
+
+![LAW - Custom Log Not Ready](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/16200fc2-347f-4a29-8122-e4681b533b2e)
+
+
+
+As a result, I couldn't query that table straight away
