@@ -206,14 +206,6 @@ Then I opened the 'Remote Desktop Connection' app on my desktop and inputted the
 
 
 
-![RDP - VM Log In Fail](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/bb46e984-f2c1-49e2-bf4c-c396e6066e19)
-
-
-
-For the first log in attempt, I purposely input the wrong password. I did this to test if it will be logged.
-
-
-
 ![RDP - Certificate Error](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/0909c9a5-a8c9-42b5-b6eb-f4cb3e5318d0)
 
 
@@ -322,7 +314,7 @@ I then updated the API key with my personal one so that it works correctly for m
 
 
 
-After saving the document, I run the script. This script has been written in a way that it perpetually loops. Therefore, it will always extract the security logs from my VM and take geographical data from the IP addresses of failed login attempts.This will then be exported onto the text document file that has been generated. 
+After saving the document, I run the script. This script has been written in a way that it perpetually loops. Therefore, it will always extract the security logs from my VM and take geographical data from the IP addresses of failed login attempts. This will then be exported onto the text document file that has been generated. 
 
 
 
@@ -388,7 +380,7 @@ Next, I had to define the collection path for the document containing the logs. 
 
 
 
-For this step, I first chose 'Windows' as the 'Type'. Then I pasted the path I copied earlier into the 'Path' text box, followed by a '\' and then the file name. It's important to put the file extension at the end, otherwise an error message appears. So for this, I used '.log' as the file extension. Then I clicked 'Next'.
+For this step, I first chose 'Windows' as the 'Type'. Then I pasted the path I copied earlier into the 'Path' text box, followed by a backslash and then the file name. It's important to put the file extension at the end, otherwise an error message appears. So for this, I used '.log' as the file extension. Then I clicked 'Next'.
 
 
 
@@ -412,4 +404,4 @@ Finally, I reviewed the details and created the custom log. It can take a while 
 
 
 
-As a result, I couldn't query that table straight away
+As a result, I couldn't query that table straight away.
