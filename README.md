@@ -404,4 +404,55 @@ Finally, I reviewed the details and created the custom log. It can take a while 
 
 
 
-As a result, I couldn't query that table straight away.
+As a result, I couldn't query that table straight away with the data I was looking for - which is failed RDP login attempts.
+
+
+
+![LAW - Security Logs](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/75b09a9f-4366-4cd7-a075-3631cf810e9a)
+
+
+
+However, a few moments later, I attempted the query again. This time, I received some data.
+
+
+
+![VM - Failed Login Event ID](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/8aa5a4f7-caf1-4e05-8fb5-20d55a9acb25)
+
+
+
+![LAW - EventID Query](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/3c7ce9dc-d3b2-4a49-8a15-bf63ee5d39d9)
+
+
+
+Another way to find failed login attempts was to query them using the EventID. In the VM's security logs, failed login attempts have an EventID which is: 4625. On my LAW, I queried that EventID to get the same data.
+
+
+
+![LAW - Raw Data on Failed RDP Logs](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/21a292e5-42a5-45d4-915b-e23fb60198ed)
+
+
+
+![LAW - Raw Data Extraction](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/6a746389-6369-40cd-9948-35f4a9ca0358)
+
+
+
+Going back to my original 'Failed_RDP_With_Geo_CL' query, I needed to now extract location details from the raw data from the results. In my LAW, I began a new query. In the query, I ran this script to extract the information I needed from the raw data:
+
+
+
+Failed_RDP_With_Geo_CL 
+| extend username = extract(@"username:([^,]+)", 1, RawData),
+         timestamp = extract(@"timestamp:([^,]+)", 1, RawData),
+         latitude = extract(@"latitude:([^,]+)", 1, RawData),
+         longitude = extract(@"longitude:([^,]+)", 1, RawData),
+         sourcehost = extract(@"sourcehost:([^,]+)", 1, RawData),
+         state = extract(@"state:([^,]+)", 1, RawData),
+         label = extract(@"label:([^,]+)", 1, RawData),
+         destination = extract(@"destinationhost:([^,]+)", 1, RawData),
+         country = extract(@"country:([^,]+)", 1, RawData)
+| where destination != "samplehost"
+| where sourcehost != ""
+| summarize event_count=count() by latitude, longitude, sourcehost, label, destination, country
+
+
+
