@@ -1,4 +1,35 @@
-Here is a detailed walkthrough of the steps I took to create a SIEM system. This project revolved around Microsoft Azure and therefore, my first step was to create a Microsoft Azure account. 
+Here is a detailed walkthrough of the steps I took to create a SIEM system. This SIEM system displays threat actor data on a world map, using Microsoft Sentinel.
+
+
+
+In this project, I create a virtual machine on Azure and turn off most security settings to make it vulnerable to potential threat actors. Once my virtual machine gets recognised by threat actors, I extract data from security logs of their failed attempts and plot this data on a world map to show where these attacks are coming from. The data extraction involves using a third-party API. At the end of the project, I am left with a map containing location data of threat actors.
+
+
+
+Toolkit
+
+- Microsoft Azure
+- Microsoft Sentinel
+- Azure Log Analytics Workspace
+- Virtual Machines
+- Remote Desktop Connection
+- PowerShell
+- IPGeolocation API
+- Windows Event Viewer
+- Windows Firewall
+
+
+
+Environments
+
+- Microsoft Azure
+- Windows 10
+
+
+
+Walkthrough
+
+This project revolved around Microsoft Azure and therefore, my first step was to create a Microsoft Azure account. 
 
 **Step 1 - Create an Azure account**
 
