@@ -456,3 +456,74 @@ Failed_RDP_With_Geo_CL
 
 
 
+**Step 8 - Creating a visual map**
+
+The next step I took was to create a visual map that shows the geographical location of the host IP addresses attempting to log into my VM.
+
+
+
+![Sentinel - Add Workbook](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/e4c9db66-6ffc-420f-9ff2-4636779a4655)
+
+
+
+On Sentinel, I clicked on 'Workbooks' and then '+ Add Workbook'
+
+
+
+![Workbook - Edit Workbook](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/3848bcee-7c1e-4958-aab5-662d613f4e28)
+
+
+
+![Workbook - Remove Default Queries](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/0072476b-3e57-4263-b736-d759cda6426f)
+
+
+
+Next, I clicked 'Edit' and removed the two basic analytics queries that come as default when creating the workbook. 
+
+
+
+![Workbook - Add Query](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/325a6ce3-31c2-40d8-adb5-1d6d77393603)
+
+
+
+The next step was to run a new query. In this query, I did not want to include any of the sample logs as I wanted to only show the actual login attempts from threat actors. To do this, I first needed to start a new query. So I clicked the '+ Add' drop down menu, then 'Add query'.
+
+
+
+![Workbook - Correct Query](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/ad940559-dad4-4840-9e87-2912c692ad64)
+
+
+
+Then, I added the query I used earlier for the raw data extraction in LAW:
+
+Failed_RDP_With_Geo_CL 
+| extend username = extract(@"username:([^,]+)", 1, RawData),
+         timestamp = extract(@"timestamp:([^,]+)", 1, RawData),
+         latitude = extract(@"latitude:([^,]+)", 1, RawData),
+         longitude = extract(@"longitude:([^,]+)", 1, RawData),
+         sourcehost = extract(@"sourcehost:([^,]+)", 1, RawData),
+         state = extract(@"state:([^,]+)", 1, RawData),
+         label = extract(@"label:([^,]+)", 1, RawData),
+         destination = extract(@"destinationhost:([^,]+)", 1, RawData),
+         country = extract(@"country:([^,]+)", 1, RawData)
+| where destination != "samplehost"
+| where sourcehost != ""
+| summarize event_count=count() by latitude, longitude, sourcehost, label, destination, country
+
+Then I clicked 'Run Query' and my data appeared.
+
+
+
+![Workbook - Map Visualisation](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/fb738e17-d29e-4d0e-b8be-392a132163d5)
+
+
+
+The next step was to change the 'Visualization' to 'Map'.
+
+
+
+![Workbook - Map Layout Settings](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/6d8d646c-2e29-4c84-85e1-2b81e744af09)
+
+
+
+In 'Map Settings', I changed the 'Location Info using' option to 'Latitude/Longitude'.
