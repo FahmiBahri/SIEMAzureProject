@@ -527,3 +527,41 @@ The next step was to change the 'Visualization' to 'Map'.
 
 
 In 'Map Settings', I changed the 'Location Info using' option to 'Latitude/Longitude'.
+
+
+
+![Workbook - Map Metric Settings](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/5d0e0740-195a-4f22-87fb-8f9387755a81)
+
+
+
+Before saving and closing my Map Settings, I had to edit my metrics. I changed the 'Metric Label' option to 'label' and 'Metric Value' to 'event_count'. I left the rest of the options on their default settings. Then I clicked 'Apply' and finally 'Save and Close'.
+
+
+
+![Workbook - Save Workbook](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/6750f8d2-1a9f-407d-9c5a-0aa9797f01e7)
+
+
+
+![Workbook - Failed RDP World Map](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/49d341ed-1e11-4db9-a1f9-720b2dc612a4)
+
+
+
+For now, I'm done with the map and this workbook so I saved and closed it.
+
+
+
+![World Map Refresh](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/c5d58b89-e6f8-4adb-a16a-42641e0baea5)
+
+
+
+![World Map Refreshed](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/ccf25bbd-e626-4648-a650-28d95dba8500)
+
+
+
+![World Map Refreshed 2](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/fd7a7f9f-7324-48ef-a6d4-5f79659d1905)
+
+
+
+To make sure it is working properly, I refreshed it to see if the log counts would change. Thankfully, they did.
+
+
