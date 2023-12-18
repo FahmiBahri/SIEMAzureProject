@@ -59,6 +59,10 @@ This VM is going to be the 'device' that I make available for external threat ac
 
 
 
+Resource Groups in Azure are very useful as they allow you to create logical connections between tools, services and other resources. This is particularly useful for allocating resources to different projects. Due to the logical grouping of these resources, anything stored in a resource group can be provisioned or deleted together. This feature makes resource management a smooth process in Azure.
+
+
+
 ![Create VM - Inbound Ports](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/3d0ebaec-2f21-4e37-9b31-f0af6d88454e)
 
 
@@ -75,7 +79,11 @@ I will be connecting to this VM later using an RDP connection. Therefore, in the
 
 
 
-No disk requirements are necessary outside of the default settings for this project so I left that section on default and proceeded straight to the 'Networking' stage. The first step here was to create a virtual network.
+No disk requirements are necessary outside of the default settings for this project so I left that section on default and proceeded straight to the 'Networking' stage. 
+
+
+
+The first step here was to create a virtual network.
 
 
 
@@ -95,6 +103,10 @@ In this section, I changed the 'NIC network security group' option to 'Advanced'
 
 
 
+An NSG is fundamentally a firewall for Azure resources. It uses rules to grant or deny access to and from a particular Azure resource, covering both inbound and outbound traffic.
+
+
+
 ![NSG - Delete inbound rules](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/d2ffa318-9227-4887-9415-466be56fd2fb)
 
 
@@ -107,7 +119,7 @@ When in this section, I deleted the current inbound rule and clicked '+ Add an i
 
 
 
-To gain a lot of data, I altered the settings of my new rule to allow traffic to come from any port and be received through any destination port, using any protocol. In usual circumstances, this would NOT be a good idea. However, I've done this on this project to attract as many attackers as possible so I had to make the VM highly discoverable.
+To gain a lot of data, I altered the settings of my new rule to allow traffic to come from any port and be received through any destination port, using any protocol. In usual circumstances, this would NOT be a good idea. However, the aim of this project is to attract as many attackers as possible. Therefore, making the VM highly discoverable was paramount.
 
 
 
