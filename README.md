@@ -1,3 +1,6 @@
+**Overview**
+
+
 Here is a detailed walkthrough of the steps I took to create a SIEM system. This SIEM system displays threat actor data on a world map, using Microsoft Sentinel.
 
 
@@ -6,7 +9,7 @@ In this project, I create a virtual machine on Azure and turn off most security 
 
 
 
-Toolkit
+**Toolkit**
 
 - Microsoft Azure
 - Microsoft Sentinel
@@ -20,14 +23,14 @@ Toolkit
 
 
 
-Environments
+**Environments**
 
 - Microsoft Azure
 - Windows 10
 
 
 
-Walkthrough
+**Walkthrough**
 
 This project revolved around Microsoft Azure and therefore, my first step was to create a Microsoft Azure account. 
 
