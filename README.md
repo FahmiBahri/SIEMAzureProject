@@ -1,4 +1,4 @@
-**Overview**
+<h2>Overview</h2>
 
 
 Here is a detailed walkthrough of the steps I took to create a SIEM system. This SIEM system displays threat actor data on a world map, using Microsoft Sentinel.
@@ -9,7 +9,7 @@ In this project, I create a virtual machine on Azure and turn off most security 
 
 
 
-**Toolkit**
+<h2>Toolkit</h2>
 
 - Microsoft Azure
 - Microsoft Sentinel
@@ -23,18 +23,18 @@ In this project, I create a virtual machine on Azure and turn off most security 
 
 
 
-**Environments**
+<h2>Environments</h2>
 
 - Microsoft Azure
 - Windows 10
 
 
 
-**Walkthrough**
+<h2>Walkthrough</h2>
 
 This project revolved around Microsoft Azure and therefore, my first step was to create a Microsoft Azure account. 
 
-**Step 1 - Create an Azure account**
+<h4>Step 1 - Create an Azure account</h4>
 
 Whilst creating this project, Azure were running a promotion allowing new users to obtain $200 credit upon signup. This will help cover the costs of running this project.
 
@@ -42,7 +42,7 @@ Whilst creating this project, Azure were running a promotion allowing new users 
 
 
 
-**Step 2 - Create a virtual Machine**
+<h4>Step 2 - Create a virtual Machine</h4>
 
 
 
@@ -74,7 +74,7 @@ I will be connecting to this VM later using an RDP connection. Therefore, in the
 
 
 
-**Step 2b - Create a Network Security Group**
+<h4>Step 2b - Create a Network Security Group</h4>
 
 
 
@@ -135,7 +135,7 @@ No other settings need to be amended, so I then clicked 'Review + create'. Then 
 
 
 
-**Step 3 - Create a Log Analytics Workspace**
+<h4>Step 3 - Create a Log Analytics Workspace</h4>
 
 
 
@@ -186,7 +186,7 @@ This opened up 'Defender plans' and they were all 'Off' by default. For this pro
 The next step was to enable the option for 'All Events' to be collected - by default it is set to 'None'.
 
 
-**Step 4 - Connecting the LAW to the VM**
+<h4>Step 4 - Connecting the LAW to the VM</h4>
 
 ![VM connection to LAW](https://github.com/FahmiBahri/SIEMAzureProject/assets/151456646/bc289f69-4c2e-4124-b51c-82a16196045f)
 
@@ -204,7 +204,7 @@ Then I clicked the 'Connect' button.
 
 
 
-**Step 5 - Microsoft Sentinel connection**
+<h4>Step 5 - Microsoft Sentinel connection</h4>
 
 
 
@@ -232,7 +232,7 @@ Finally, I added the Sentinel to my LAW.
 
 
 
-**Step 5 - Remote Desktop connection to VM**
+<h4>Step 5 - Remote Desktop connection to VM</h4>
 
 
 
@@ -331,7 +331,7 @@ I disabled all firewalls. Now I'm able to ping my VM from my PC.
 
 
 
-**Step 6 - Collecting Security Log Data from the VM**
+<h4>Step 6 - Collecting Security Log Data from the VM</h4>
 
 
 
@@ -380,7 +380,7 @@ Here is an example entry of a failed login attempt that was recorded in the file
 
 
 
-**Step 7 - Exporting the Log Data onto Azure**
+<h4>Step 7 - Exporting the Log Data onto Azure</h4>
 
 
 
@@ -502,7 +502,7 @@ Failed_RDP_With_Geo_CL
 
 
 
-**Step 8 - Creating a visual map**
+<h4>Step 8 - Creating a visual map</h4>
 
 The next step I took was to create a visual map that shows the geographical location of the host IP addresses attempting to log into my VM.
 
