@@ -169,7 +169,7 @@ Next, I went on to the Security Center to access Microsoft Defender for Cloud. T
 
 
 
-In Microsoft Defender for Cloud, I clicked on 'Environment settings' and then the drop-down button next to my subscription. This revealed my LAW, which I then clicked on. Here, I can connect services like Microsoft Defender and Microsoft Sentinel to my VM to help collect date for my LAW.
+In Microsoft Defender for Cloud, I clicked on 'Environment settings' and then the drop-down button next to my subscription. This revealed my LAW, which I then clicked on. Here, I can connect services like Microsoft Defender and Microsoft Sentinel to my VM to help collect data for my LAW.
 
 
 
@@ -222,7 +222,7 @@ The next step was to create and connect Microsoft Sentinel to my VM. With Sentin
 
 
 
-Then I clicked on my VM, and pressed the 'Add' button.
+Then I clicked on my LAW. Naturally, any VM's associated with my LAW will receive the Sentinel services/plans I enabled earlier.
 
 
 
@@ -242,7 +242,7 @@ Finally, I added the Sentinel to my LAW.
 
 
 
-At this stage, the required configurations have now beem completed to begin connecting to the VM itself. I am connecting via a remote desktop connection (RDP), which will require the public IP address of the VM. I found this in the 'Virtual Machines' section of Azure.
+At this stage, the required configurations have now been completed to begin connecting to the VM itself. I am connecting via a remote desktop connection (RDP), which will require the public IP address of the VM. I found this in the 'Virtual Machines' section of Azure.
 
 
 
@@ -341,7 +341,7 @@ I disabled all firewalls. Now I'm able to ping my VM from my PC.
 
 
 
-The next step was for me to utilise a PowerShell script to export my VM's security logs onto a document. Whilst you can create a custom script, I made use of one that was already available online. 
+The next step was for me to utilise a PowerShell script to export my VM's security logs onto a document. Whilst the option to create a custom script is available, I made use of one that was already available online. 
 I pasted this script into PowerShell ISE on the VM and saved the document.
 
 
@@ -354,7 +354,11 @@ I pasted this script into PowerShell ISE on the VM and saved the document.
 
 
 
-I then updated the API key with my personal one so that it works correctly for my resources and saved it again.
+I then updated the script with my specific API key so that it works correctly for my resources. Then I saved it again.
+
+
+
+In essence, the script should now search Event Viewer on my HoneyPot VM and locate all failed login attempts, identifying them by their Event ID - 4625. Then, the script should transmit this data to the IPgeolocation.io API. Whilst the data is at IPgeolocation.io, specific details should be parsed and extracted from the attacker's IP address - like the country and city that the attack is coming from. From the API, those details should be transmitted back to my VM and saved onto a text document file.
 
 
 
@@ -362,7 +366,7 @@ I then updated the API key with my personal one so that it works correctly for m
 
 
 
-After saving the document, I run the script. This script has been written in a way that it perpetually loops. Therefore, it will always extract the security logs from my VM and take geographical data from the IP addresses of failed login attempts. This will then be exported onto the text document file that has been generated. 
+After saving the document, I run the script. This script has been written in a way that it perpetually loops. Therefore, it will always extract the security logs from my VM and take geographical data from the IP addresses of the failed login attempts.
 
 
 
@@ -370,7 +374,7 @@ After saving the document, I run the script. This script has been written in a w
 
 
 
-The script I used exports the data onto a document in the 'ProgramData' folder of the VM. However, this folder was hidden so I needed to enable view of hidden documents.
+The script I used exports the data, in string format, onto a document in the 'ProgramData' folder of the VM. However, this folder was hidden so I needed to enable view of hidden documents.
 
 
 
@@ -390,7 +394,11 @@ Here is an example entry of a failed login attempt that was recorded in the file
 
 
 
-To do this, I need to create a custom log on my LAW that will bring in the data from that document saved on my VM's 'ProgramData' folder.
+So far, I now have a program in place that monitors failed login attempts, logs them and extracts meaningful geographical information from each attack, saving it onto a text document within the VM itself. 
+
+The next step is to run a query from my LAW that will export this data from my VM onto Azure, then display this data onto a world map.
+
+To do this, I first need to create a custom log on my LAW that will bring in the data from that document saved on my VM's 'ProgramData' folder.
 
 I went onto my LAW and clicked on: 'Tables', '+ Create' and then 'New custom log (MMA-based)'.
 
@@ -612,4 +620,13 @@ For now, I'm done with the map and this workbook so I saved and closed it.
 
 To make sure it is working properly, I refreshed it to see if the log counts would change. Thankfully, they did.
 
+<h4>Conclusion</h4>
 
+This project was insightful and intriguing. I learned a number of useful skills including:
+
+- Implementing a third party API into my SIEM system.
+- Configuring a VM on Azure.
+- Configuring a Log Analytics Workspace on Azure.
+- Using Micrsoft Defender for Cloud to extract log data from a VM into Azure Log Analytics Workspace.
+- Using RDP to remotely log in to a VM.
+- Using Event Viewer to keep track of log in attempts.
