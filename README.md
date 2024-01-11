@@ -3,7 +3,7 @@
 <h2>Overview</h2>
 
 
-Here is a detailed walkthrough of the steps I took to create a SIEM system. This Security Information & Event Management (SIEM) system displays threat actor data on a world map, using Microsoft Sentinel.
+Here is a detailed walkthrough of the steps I took to create a Security Information & Event Management (SIEM) system. This system displays threat actor data on a world map, using Microsoft Sentinel.
 
 
 
